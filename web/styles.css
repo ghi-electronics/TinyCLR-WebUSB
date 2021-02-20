@@ -1,0 +1,24 @@
+.webusb-usbicon {
+    display: inline-flex; 
+    position: relative; 
+    flex-shrink: 0; 
+    vertical-align: middle; 
+    width: 24; 
+    height: 24;
+}
+
+.webusb-infoicon {
+    display: inline-flex; 
+    position: relative; 
+    flex-shrink: 0; 
+    vertical-align: middle; 
+    width: 18px; 
+    height: 18px;
+}
+
+.webusb-notification {
+    width: 100%; 
+    background-color:aqua;
+}
+
+
