@@ -1,1 +1,55 @@
-Hellow World
+<html>
+    <header>
+        <link rel="stylesheet" href="styles.css">
+        <script src="webusb.js"></script>
+    </header>
+
+    <body>
+        <div id="notification" class="webusb-notification">
+            <div style="width: 50%; padding: 5px;">
+                <span>
+                    <svg class="webusb-infoicon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
+                    </svg>
+                </span>
+                Press
+                <button style="border-radius: 8px;" onclick="connect()">
+                    <span>
+                        <span>
+                            <svg class="webusb-usbicon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93 0-1.21-.99-2.2-2.2-2.2-1.21 0-2.2.99-2.2 2.2 0 .85.5 1.56 1.2 1.93V13c0 1.11.89 2 2 2h3v3.05c-.71.37-1.2 1.1-1.2 1.95 0 1.22.99 2.2 2.2 2.2 1.21 0 2.2-.98 2.2-2.2 0-.85-.49-1.58-1.2-1.95V15h3c1.11 0 2-.89 2-2v-2h1V7h-4z"></path>
+                            </svg>
+                        </span>
+                    <span>
+                </button>
+                to connect to your device
+            </div>
+        </div>
+
+        <div id="interaction" style="display: none;">
+            <input id="message"/>
+            <div id="response"></div>
+            <button onclick="send()">Send</button>
+        </div>
+    </body>
+</html>
+
+<script>
+    let webusb = new WebUSB(2, 1);
+
+    async function connect(){
+        await webusb.connect([{vendorId:0x1209}]);
+        document.getElementById("notification").style.display="none";
+        document.getElementById("interaction").style.display="inline-block";
+    }
+
+    async function send(){
+        let messageControl = document.getElementById("message");
+        let responseControl = document.getElementById("response");
+
+        await webusb.sendString(messageControl.value);
+
+        let response = await webusb.readString();
+        responseControl.innerText = response;
+    }
+</script>
