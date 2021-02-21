@@ -51,7 +51,7 @@
     async function connect(){
         try {
             hideError();
-            await webusb.connect([{vendorId:0x1209}]);
+            await webusb.connect([{vendorId:0x1B9F}]);
             document.getElementById("notification").style.display="none";
             document.getElementById("interaction").style.display="inline-block";
         } catch(e){
