@@ -1,3 +1,9 @@
+body {
+    display: table;
+    min-height: 95%;
+    min-width: 99%;
+}
+
 .webusb-usbicon {
     display: inline-flex; 
     position: relative; 
@@ -19,6 +25,22 @@
 .webusb-notification {
     width: 100%; 
     background-color:aqua;
+}
+
+.webusb-notification-content {
+    width: 50%; 
+    padding: 5px;
+}
+
+.webusb-error {
+    width: 100%;
+    background-color: red;
+    display: table-footer-group;
+}
+
+.webusb-error-content {
+    padding: 10px; 
+    color: white;
 }
 
 
