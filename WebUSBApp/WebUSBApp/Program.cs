@@ -20,8 +20,6 @@ namespace WebUSBApp
                 ProductName = "Test WebUSB",
                 SerialNumber = "12345678",
                 Guid = "{F99BAABA-F033-483D-AFB2-A6E4F3AE6310}",
-                VendorId = 0x1209,
-                ProductId = 0xa800,
                 BcdUsb = 0x210,
             };
 
