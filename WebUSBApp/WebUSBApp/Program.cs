@@ -13,17 +13,17 @@ namespace WebUSBApp
         {
             var usbclientController = UsbClientController.GetDefault();
 
-            var usbClientSetting = new UsbClientSetting()
+            var usbClientSetting = new UsbClientSetting
             {
+                ProductName = "TinyCLR WebUsb",
+                InterfaceName = "TinyCLR WebUsb",
+                MaxPower = RawDevice.MAX_POWER,
+                SerialNumber = "12344321",
+                Guid = "{A5FDFBF7-E5EE-489D-8037-48E2EED80A29}",
                 Mode = UsbClientMode.WinUsb,
-                ManufactureName = "GHI Electronics",
-                ProductName = "Test WebUSB",
-                SerialNumber = "12345678",
-                Guid = "{F99BAABA-F033-483D-AFB2-A6E4F3AE6310}",
-                BcdUsb = 0x210,
             };
 
-            var winUsb = new WinUsb(usbclientController, usbClientSetting);
+            var winUsb = new WebUsb(usbclientController, usbClientSetting);
             winUsb.DeviceStateChanged += (a, b) => Debug.WriteLine("Connection changed.");
             winUsb.DataReceived += (a, count) => Debug.WriteLine("Data received:" + count);
 
