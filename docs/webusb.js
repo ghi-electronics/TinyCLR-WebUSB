@@ -5,6 +5,7 @@ class WebUSB {
     }
     
     async connect(deviceFilters) {
+        this.x=0;
         this.device = await navigator.usb.requestDevice({
             filters:deviceFilters
         });

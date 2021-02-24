@@ -1,41 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <header>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>GHI-Electronics TinyCLR WebUSB</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
         <link rel="stylesheet" href="styles.css">
-        <script src="webusb.js"></script>
+        <script src="webusb.js?1"></script>
     </header>
 
     <body>
-        <div id="notification" class="webusb-notification">
-            <div class="webusb-notification-content">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="navbar-brand">
+                <img class="d-inline align-top mr-2" src="https://docs.ghielectronics.com/images/logo.png" /> 
+                <div class="d-inline align-middle">TinyCLR WebUSB</div>
+            </div>
+        </nav>
+        
+        <div id="id-connect" class="alert alert-primary" role="alert">
+            <span>
+                <svg class="align-middle mr-2" focusable="false" width="24" height="24" aria-hidden="true">
+                    <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
+                </svg>
+            </span>
+            Press
+            <button class="btn btn-outline-primary ml-1 mr-1" onclick="connect()">
                 <span>
-                    <svg class="webusb-infoicon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="align-middle" focusable="false" width="24" height="24" aria-hidden="true">
+                        <path d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93 0-1.21-.99-2.2-2.2-2.2-1.21 0-2.2.99-2.2 2.2 0 .85.5 1.56 1.2 1.93V13c0 1.11.89 2 2 2h3v3.05c-.71.37-1.2 1.1-1.2 1.95 0 1.22.99 2.2 2.2 2.2 1.21 0 2.2-.98 2.2-2.2 0-.85-.49-1.58-1.2-1.95V15h3c1.11 0 2-.89 2-2v-2h1V7h-4z"></path>
+                    </svg>
+                </span>
+            </button>
+            to connect to your device 
+        </div>
+
+        <div id="id-interaction" class="container">
+            <fieldset id="id-inputs" class="border p-3" disabled="true" >
+                <div class="row">
+                    <legend class="w-auto px-2">Set Pin</legend>
+                    <div class="col-md-9">
+                        <div>
+                            <label for="port" class="col-2">Port</label>
+                            <select id="port">
+                                <option value="0">A</option>
+                                <option value="1">B</option>
+                                <option value="2">C</option>
+                                <option value="3">D</option>
+                                <option value="4">E</option>
+                                <option value="5">F</option>
+                                <option value="6">G</option>
+                                <option value="7">H</option>
+                                <option value="8">I</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="pin" class="col-2">Pin</label>
+                            <select id="pin">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="state" class="col-2">State</label>
+                            <select id="state">
+                                <option value="1">High</option>
+                                <option value="0">Low</option>
+                            </select>
+                        </div>
+                    </div> 
+                </div>
+                <button class="btn btn-primary" onclick="sendUpdate()">Update State</button>
+            </fieldset>
+
+        </div>
+
+        <div id="id-status" style="display:none">
+            <div class="alert alert-success" role="alert">
+                <span>
+                    <svg class="align-middle mr-2" style="fill:Green" focusable="false" width="24" height="24" aria-hidden="true">
                         <path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20, 12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10, 10 0 0,0 12,2M11,17H13V11H11V17Z"></path>
                     </svg>
                 </span>
-                Press
-                <button style="border-radius: 8px;" onclick="connect()">
-                    <span>
-                        <span>
-                            <svg class="webusb-usbicon" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M15 7v4h1v2h-3V5h2l-3-4-3 4h2v8H8v-2.07c.7-.37 1.2-1.08 1.2-1.93 0-1.21-.99-2.2-2.2-2.2-1.21 0-2.2.99-2.2 2.2 0 .85.5 1.56 1.2 1.93V13c0 1.11.89 2 2 2h3v3.05c-.71.37-1.2 1.1-1.2 1.95 0 1.22.99 2.2 2.2 2.2 1.21 0 2.2-.98 2.2-2.2 0-.85-.49-1.58-1.2-1.95V15h3c1.11 0 2-.89 2-2v-2h1V7h-4z"></path>
-                            </svg>
-                        </span>
-                    <span>
-                </button>
-                to connect to your device
+                <span id="status-message"></span>
             </div>
         </div>
 
-        <div id="interaction" style="display: none;">
-            <input id="message"/>
-            <div id="response"></div>
-            <button onclick="send()">Send</button>
-        </div>
-
-        <div id="error-notification" class="webusb-error" style="visibility:hidden;">
-            <div class="webusb-error-content">
+        <div id="id-error" style="display: none;">
+            <div class="alert alert-danger" role="alert">
                 <span>
-                    <svg class="webusb-infoicon" style="fill:white" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg class="align-middle mr-2" style="fill:red" focusable="false" width="24" height="24" aria-hidden="true">
                         <path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z"></path>
                     </svg>
                 </span>
@@ -52,32 +125,41 @@
         try {
             hideError();
             await webusb.connect([{vendorId:0x1B9F}]);
-            document.getElementById("notification").style.display="none";
-            document.getElementById("interaction").style.display="inline-block";
+            $("#id-connect").slideUp();
+            $("#id-inputs").prop("disabled", false);
         } catch(e){
             showError(e);
         }
     }
 
-    async function send(){
-        let messageControl = document.getElementById("message");
-        let responseControl = document.getElementById("response");
-
-        await webusb.sendString(messageControl.value);
-
+    async function sendUpdate(){
+        let port = parseInt($("#port").val());
+        let pin = parseInt($("#pin").val());
+        let state = $("#state").val();
+        let command = ((port*16)+pin)+"="+state;
+        
+        await webusb.sendString(command);
         let response = await webusb.readString();
-        responseControl.innerText = response;
+        showStatus(response);
     }
 
     function hideError(){
-        let errorControl = document.getElementById("error-notification");
-        errorControl.style.visibility="hidden";
+        $("#id-error").hide();
+    }
+
+    function showStatus(message) {
+        $("#id-inputs").prop("disabled", true);
+        hideError();
+        $("#id-status").show();
+        $("#status-message").text(message);
+        $.when($("#id-status").fadeOut(1000)).done(
+            function(){$("#id-inputs").prop("disabled", false);}
+        );
     }
 
     function showError(message){
-        let errorControl = document.getElementById("error-notification");
-        let messageControl = document.getElementById("error-message");
-        errorControl.style.visibility="visible";
-        messageControl.innerText = message;
+        $("#id-inputs").prop("disabled", true);
+        $("#id-error").show();
+        $("#error-message").text(message);
     }
 </script>

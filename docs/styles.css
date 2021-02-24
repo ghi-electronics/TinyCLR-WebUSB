@@ -1,45 +1,4 @@
-body {
-    display: table;
-    min-height: 96%;
-    min-width: 99%;
+html, body {
+    height: 100%
 }
-
-.webusb-usbicon {
-    display: inline-flex; 
-    position: relative; 
-    flex-shrink: 0; 
-    vertical-align: middle; 
-    width: 24; 
-    height: 24;
-}
-
-.webusb-infoicon {
-    display: inline-flex; 
-    position: relative; 
-    flex-shrink: 0; 
-    vertical-align: middle; 
-    width: 18px; 
-    height: 18px;
-}
-
-.webusb-notification {
-    width: 100%; 
-    background-color:aqua;
-}
-
-.webusb-notification-content {
-    padding: 5px;
-}
-
-.webusb-error {
-    width: 100%;
-    background-color: red;
-    display: table-footer-group;
-}
-
-.webusb-error-content {
-    padding: 10px; 
-    color: white;
-}
-
 
