@@ -68,7 +68,7 @@ namespace WebUSBApp
             {
                 if (webUsb.Stream.BytesToRead > 0)
                 {
-                    var messageLength = webUsb.Stream.ReadByte();
+                    var messageLength = webUsb.Stream.BytesToRead;
                     if (messageLength > 0)
                     {
                         var messageBuffer = new byte[messageLength];
