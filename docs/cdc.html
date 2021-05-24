@@ -12,7 +12,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
         <link rel="stylesheet" href="styles.css">
-        <script src="webusb.js?1"></script>
+        <script src="SerialWebUSB.js?1"></script>
     </header>
 
     <body>
@@ -119,16 +119,16 @@
 </html>
 
 <script>
-    let webusb = new WebUSB(1, 2);
+    let serialwebusb = new SerialWebUSB(2, 1);
 
     async function connect(){
         try {
             hideError();
-            await webusb.connect([{vendorId:0x1B9F}]);
+            await serialwebusb.connect([{usbVendorId:0x1B9F}]);
             $("#id-connect").slideUp();
             $("#id-inputs").prop("disabled", false);
         } catch(e){
-            showError("CDC Error" + e);
+            showError("connect Error" + e);
         }
     }
 
@@ -137,10 +137,10 @@
         let pin = parseInt($("#pin").val());
         let state = $("#state").val();
         let command = ((port*16)+pin)+"="+state;
-        
-        await webusb.sendString(command);
-        let response = await webusb.readString();
-        showStatus(response);
+		
+        await serialwebusb.sendString(command);
+        let response = await serialwebusb.readString();
+        showStatus(command);
     }
 
     function hideError(){
