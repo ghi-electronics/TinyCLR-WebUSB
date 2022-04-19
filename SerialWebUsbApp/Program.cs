@@ -13,6 +13,7 @@ namespace SerialWebUsbApp {
         private static Hashtable pins = new Hashtable();
 
         static void Main() {
+            // visit link for demo: https://ghi-electronics.github.io/TinyCLR-WebUSB/serialwebusb
             gpio = GpioController.GetDefault();
 
             var usbclientController = UsbClientController.GetDefault();

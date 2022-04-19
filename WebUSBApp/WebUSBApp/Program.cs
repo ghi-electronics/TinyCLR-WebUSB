@@ -17,6 +17,7 @@ namespace WebUSBApp
 
         static void Main()
         {
+            // visit link for demo: https://ghi-electronics.github.io/TinyCLR-WebUSB/
             gpio = GpioController.GetDefault();
 
             var usbclientController = UsbClientController.GetDefault();
